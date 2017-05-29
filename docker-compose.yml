@@ -1,0 +1,34 @@
+version: '2'
+services:
+  demo-application:
+    image: barrycommins/spring-boot-sleuth-splunk-demo
+    environment:
+      - LOGGING_FILE=/logs/demo-application.log
+    ports:
+      - "8080:8080"
+    volumes:
+      - log_volume:/logs
+  splunk:
+    image: splunk/splunk
+    hostname: splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_USER=root
+      - SPLUNK_ENABLE_LISTEN=9997
+    ports:
+      - "8000:8000"
+  splunkforwarder:
+    image: splunk/universalforwarder:6.5.3-monitor
+    hostname: splunkforwarder
+    environment:
+      - SPLUNK_START_ARGS=--accept-license --answer-yes
+      - SPLUNK_FORWARD_SERVER=splunk:9997
+      - SPLUNK_USER=root
+      - SPLUNK_ADD=monitor /logs
+    restart: always
+    depends_on:
+      - splunk
+    volumes:
+      - log_volume:/logs
+volumes:
+  log_volume:
