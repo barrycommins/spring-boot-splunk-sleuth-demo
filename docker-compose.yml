@@ -9,22 +9,24 @@ services:
     volumes:
       - log_volume:/logs
   splunk:
-    image: splunk/splunk
+    image: splunk/splunk:7.3.0
     hostname: splunk
     environment:
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_USER=root
       - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_PASSWORD=password
     ports:
       - "8000:8000"
   splunkforwarder:
-    image: splunk/universalforwarder:6.5.3-monitor
+    image: splunk/universalforwarder:7.3.0
     hostname: splunkforwarder
     environment:
       - SPLUNK_START_ARGS=--accept-license --answer-yes
-      - SPLUNK_FORWARD_SERVER=splunk:9997
+      - SPLUNK_STANDALONE_URL=splunk:9997
       - SPLUNK_USER=root
       - SPLUNK_ADD=monitor /logs
+      - SPLUNK_PASSWORD=password
     restart: always
     depends_on:
       - splunk

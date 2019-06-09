@@ -37,7 +37,9 @@ curl http://localhost:8080?name=test
 
 ## View Logs
 
-Got to [Splunk login](http://localhost:8000) to view the logs
+Got to [Splunk login](http://localhost:8000) to view the logs.
+
+Login is admin/password
 
 ## Stop
 
