@@ -3,7 +3,7 @@ services:
   demo-application:
     image: barrycommins/spring-boot-sleuth-splunk-demo
     environment:
-      - LOGGING_FILE=/logs/demo-application.log
+      - LOG_FILE=/logs/demo-application.log
     ports:
       - "8080:8080"
     volumes:
