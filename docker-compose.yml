@@ -2,14 +2,15 @@ version: '2'
 services:
   demo-application:
     image: barrycommins/spring-boot-sleuth-splunk-demo
+    user: root  # has to run as root user, because it needs to write logs to shared volume
     environment:
-      - LOGGING_FILE=/logs/demo-application.log
+      - LOGGING_FILE_NAME=/logs/demo-application.log
     ports:
       - "8080:8080"
     volumes:
       - log_volume:/logs
   splunk:
-    image: splunk/splunk:7.3.0
+    image: splunk/splunk:8.0
     hostname: splunk
     environment:
       - SPLUNK_START_ARGS=--accept-license
@@ -19,7 +20,7 @@ services:
     ports:
       - "8000:8000"
   splunkforwarder:
-    image: splunk/universalforwarder:7.3.0
+    image: splunk/universalforwarder:8.0
     hostname: splunkforwarder
     environment:
       - SPLUNK_START_ARGS=--accept-license --answer-yes

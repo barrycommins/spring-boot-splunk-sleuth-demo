@@ -80,37 +80,15 @@
                         <goals>
                             <goal>repackage</goal>
                             <goal>build-info</goal>
+							<goal>build-image</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <baseImage>openjdk:8-alpine</baseImage>
-                    <!-- @formatter: off-->
-                    <entryPoint>["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]
-                    </entryPoint>
-                    <!-- @formatter: on-->
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
+				<configuration>
+					<image>
+						<name>barrycommins/${project.artifactId}</name>
+					</image>
+				</configuration>
             </plugin>
         </plugins>
     </build>

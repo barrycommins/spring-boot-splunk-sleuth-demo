@@ -7,7 +7,7 @@ Sample project to show log forwarding from a [Spring Boot](https://projects.spri
 Build the application as a [Docker](https://www.docker.com/) image using:
 
 ```bash
-mvn clean install
+mvn clean package
 ```
 
 ## Run
@@ -20,7 +20,7 @@ docker-compose up
 
 This will bring up three containers: A demo application, Splunk, and a Spunk Forwarder.
 
-Shares are forwarded to Splunk via a shared volume between the application and forwarder.
+Logs are forwarded to Splunk via a shared volume between the application and forwarder.
 
 It is possible to send logs to Splunk via Docker's logging mechanism, but the goal here was to use the file forwarder to replicate a production setup.
 
