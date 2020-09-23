@@ -1,3 +1,4 @@
+# Spring Boot Sleuth Splunk demo  [![Build Status](https://travis-ci.com/barrycommins/spring-boot-splunk-sleuth-demo.svg?branch=master)](https://travis-ci.com/barrycommins/spring-boot-splunk-sleuth-demo)
 Sample project to show log forwarding from a [Spring Boot](https://projects.spring.io/spring-boot/) application to [Splunk](https://www.splunk.com/) via a file forwarder.
 
 [Sleuth](https://cloud.spring.io/spring-cloud-sleuth/) is also added to generate IDs for each request
